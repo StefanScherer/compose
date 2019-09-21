@@ -35,10 +35,13 @@ RUN apt-get update && apt-get install -y \
     gcc \
     git \
     libc-dev \
+    libffi-dev \
     libgcc-6-dev \
+    libssl-dev \
     make \
     openssl \
-    python2.7-dev
+    python2.7-dev \
+    zlib1g-dev
 
 FROM build-${BUILD_PLATFORM} AS build
 COPY docker-compose-entrypoint.sh /usr/local/bin/
