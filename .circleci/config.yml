@@ -54,13 +54,12 @@ jobs:
             OS_NAME=Linux PKG_NAME=linux ./script/circle/bintray-deploy.sh
 
   build-linux-arm-binary:
-    machine:
-      enabled: true
+    working_directory: ~/compose
+    docker:
+       - image: docker:18.09.8
     steps:
       - checkout
-      - run:
-          name: uname -a
-          command: uname -a
+      - setup_remote_docker
       - run:
           name: register QEMU
           command: docker run --rm --privileged hypriot/qemu-register
