@@ -53,11 +53,27 @@ jobs:
           command: |
             OS_NAME=Linux PKG_NAME=linux ./script/circle/bintray-deploy.sh
 
+  build-linux-arm-binary:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: build Linux arm binary
+          command: ARCH=armv7l ARMV5_ORG=arm32v5/ ARMV6_ORG=arm32v6/ ./script/build/linux
+      - store_artifacts:
+          path: dist/docker-compose-Linux-armv7l
+          destination: docker-compose-Linux-armv7l
+      - deploy:
+          name: Deploy binary to bintray
+          command: |
+            OS_NAME=Linux PKG_NAME=linux ./script/circle/bintray-deploy.sh
 
 workflows:
   version: 2
   all:
     jobs:
-      - test
+      # - test
       - build-linux-binary
-      - build-osx-binary
+      - build-linux-arm-binary
+      # - build-osx-binary
