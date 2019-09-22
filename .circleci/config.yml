@@ -54,6 +54,8 @@ jobs:
             OS_NAME=Linux PKG_NAME=linux ./script/circle/bintray-deploy.sh
 
   build-linux-arm-binary:
+    docker:
+       - image: docker:18.09.9
     steps:
       - checkout
       - setup_remote_docker
