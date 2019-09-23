@@ -66,6 +66,7 @@ jobs:
       - run:
           name: build Linux arm binary
           command: ARCH=armv7l ARMV5_ORG=arm32v5/ ARMV6_ORG=arm32v6/ ./script/build/linux
+          no_output_timeout: 9000
       - store_artifacts:
           path: dist/docker-compose-Linux-armv7l
           destination: docker-compose-Linux-armv7l
